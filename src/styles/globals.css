@@ -1,0 +1,172 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    scroll-behavior: smooth;
+    font-family: "Montserrat", sans-serif;
+  }
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #000461 transparent;
+  scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+  width: 0.25em;
+  height: 0.25em;
+}
+::-webkit-scrollbar-thumb {
+  background: #000461;
+  border-radius: 10em;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+*:disabled {
+  cursor: not-allowed;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: black;
+  background-color: white;
+  font-family: "Montserrat", sans-serif;
+}
+body.modal-open {
+  overflow: hidden; /* see "modal-open" in Modal.tsx */
+  border: none !important;
+}
+dialog{
+  padding: 0;
+}
+dialog:focus{
+  border: none !important;
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+}
+body.loading {
+  overflow: hidden;
+  height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #000461 transparent;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: black;
+    background: white !important;
+  }
+}
+.main-background-image {
+  background: linear-gradient(90deg, #fef9fd 33%, #ffffff 49%, #fef9fd 65%);
+}
+
+@layer components {
+  .main-container {
+     @apply container mx-auto px-6 md:px-44 lg:px-24 max-[1280px]:px-0;
+  } 
+  .common-transition {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  .btn-theme {
+    @apply px-4 py-2 bg-theme text-white font-semibold rounded-md flex gap-2 items-center hover:scale-105 transition-all ease-in-out duration-300;
+  }
+  .btn-theme-full {
+    @apply w-full bg-theme text-white rounded-md font-semibold py-2 hover:scale-105 transition-all ease-in-out duration-200;
+  }
+  .btn-primary {
+    @apply px-4 py-2 hover:scale-105 ease-in-out transition-all duration-200 rounded-md text-sm font-semibold flex gap-2 items-center;
+  }
+}
+
+.round-size {
+  border-radius: 0px 0px 58px 58px;
+}
+
+.draw-bar {
+  position: absolute;
+  transform: translateY(-150%);
+  display: flex;
+  justify-content: center;
+  left: 0%;
+  width: 100%;
+  transition: ease-in-out 800ms;
+  overflow-y: auto;
+  /* position: fixed; */
+  z-index: 1;
+  display: none;
+}
+.draw-bar.active {
+  transform: translateY(0%);
+}
+
+.dashboard-card-shadow {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.slider-animation-x{
+  animation: slider-x 0.5s ease-in-out;
+}
+@keyframes slider-x {
+  0% {
+    transform: translateX(400%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.slider-animation-x-2{
+  animation: slider-x-2 0.5s ease-in-out;
+}
+@keyframes slider-x-2 {
+  0% {
+    transform: translateX(400%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.slider-animation-x-reverse{
+  animation: slider-x-reverse 0.5s ease-in-out;
+}
+@keyframes slider-x-reverse {
+  0% {
+    transform: translateX(-400%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.slider-animation-x-reverse-2{
+  animation: slider-x-reverse-2 0.5s ease-in-out;
+}
+@keyframes slider-x-reverse-2 {
+  0% {
+    transform: translateX(-400%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* ----------customModal--------- */
