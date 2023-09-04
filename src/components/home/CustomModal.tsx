@@ -76,7 +76,7 @@ const CustomModal = ({
   const handleNavigation = (type: string) => {
     if (type === "next") {
       const handleNext = () => {
-        setIsAnimation(!isAnimation);
+        setIsAnimation((prev) => !prev);
         if (activeIndex === galleryArr.length - 1) {
           setActiveIndex(0);
         } else {
@@ -87,7 +87,7 @@ const CustomModal = ({
       return handleNext();
     } else {
       const handlePrev = () => {
-        setIsAnimation(!isAnimation);
+        setIsAnimation((prev) => !prev);
         if (activeIndex === 0) {
           setActiveIndex(galleryArr.length - 1);
         } else {
@@ -102,7 +102,7 @@ const CustomModal = ({
   useEffect(() => {
     if (isPlay) {
       const time = setInterval(() => {
-        setIsAnimation(!isAnimation);
+        setIsAnimation((prev) => !prev);
         if (galleryArr.length - 1 === activeIndex) {
           setActiveIndex(0);
         } else {
@@ -181,7 +181,15 @@ const CustomModal = ({
             alt="photo"
             className={` w-11/12 md:w-10/12 lg:w-3/5 h-[40vh] md:h-[35vh] lg:h-full rounded-md transition-all duration-200 ease-in-out ${
               isZoomed ? ` scale-110` : ""
-            } ${isAnimation ? "slider-animation-x" : "slider-animation-x-2"} `}
+            } ${
+              goLeft
+                ? isAnimation
+                  ? "slider-animation-x-reverse"
+                  : "slider-animation-x-reverse-2"
+                : isAnimation
+                ? "slider-animation-x"
+                : "slider-animation-x-2"
+            } `}
           />
           <span className="absolute left-4 top-4 font-bold text-3xl text-white">
             {`${activeIndex}`}
@@ -214,7 +222,7 @@ const CustomModal = ({
               onClick={() => {
                 setPrevIndex(activeIndex);
                 setActiveIndex(index);
-                setIsAnimation(!isAnimation);
+                setIsAnimation((prev) => !prev);
               }}
             />
           ))}
