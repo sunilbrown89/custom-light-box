@@ -177,6 +177,7 @@ const CustomModal = ({
         {/*-------------------------------------------------Big image-div--------------------------------------- */}
         <aside className="absolute top-1/4 md:top-[30%] lg:top-[5%] left-1/2 -translate-x-1/2 w-full grid place-items-center">
           <img
+            key={galleryArr[activeIndex]._id}
             src={galleryArr[activeIndex].image}
             alt="photo"
             className={` w-11/12 md:w-10/12 lg:w-3/5 h-[40vh] md:h-[35vh] lg:h-full rounded-md transition-all duration-200 ease-in-out ${

@@ -62,7 +62,7 @@ const Gallery = () => {
       <aside className=" py-5 ">
         <div className="grid grid-cols-2 md:grid-cols-6 md:grid-rows-2 gap-3 md:gap-4 lg:gap-5 pl-1">
           {galleryArr?.map((item: IGallery, index: number) => (
-            <GalleryCard item={item} index={index} />
+            <GalleryCard item={item} index={index} key={item?._id} />
           ))}
         </div>
       </aside>

@@ -1,6 +1,6 @@
 import React from "react";
 import Carousel from "./Carousal";
-const galleryArr = [
+const galleryArray = [
   {
     _id: "1",
     image:
@@ -106,7 +106,7 @@ const Practice = () => {
       <div className="relative">
         <div className="max-w-lg">
           <p>425</p>
-          <Carousel slides={galleryArr} />
+          <Carousel slides={galleryArray} activeImage={""} activeIndex={0} />
         </div>
       </div>
     </section>

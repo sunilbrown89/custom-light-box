@@ -1,5 +1,5 @@
 interface IGalleryPrc {
-    _id: any;
+    _id: string;
     image: string;
     text: string;
     placing: string;

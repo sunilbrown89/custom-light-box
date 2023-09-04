@@ -8,8 +8,8 @@ export default function Carousel({
   activeImage,
   activeIndex,
 }: {
-  autoSlide?: boolean;
-  autoSlideInterval?: number;
+  autoSlide?: boolean | undefined;
+  autoSlideInterval?: number | undefined;
   slides: IGalleryPrc[];
   activeImage: string;
   activeIndex: number;
