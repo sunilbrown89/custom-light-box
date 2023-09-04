@@ -19,24 +19,11 @@ const CustomModal = ({
   const [isAnimation, setIsAnimation] = useState(true);
   const [prevIndex, setPrevIndex] = useState(activeIndex);
 
-  // let currentIndex = activeIndex;
-
-  // function moveToNewIndex(newIndex: number) {
-  //   const previousIndex = currentIndex;
-  //   currentIndex = newIndex;
-  //   return previousIndex;
-  // }
-
-  // const newIndex = 1;
-  // const previousIndex = moveToNewIndex(newIndex);
-  // console.log(`Previous index-->: ${previousIndex}`);
-  // console.log(`current index-->: ${currentIndex}`);
-
   const goLeft = activeIndex < prevIndex;
   const goRight = activeIndex > prevIndex;
 
-  console.log("goLeft==>", goLeft);
-  console.log("goRight==>", goRight);
+  // console.log("goLeft==>", goLeft);
+  // console.log("goRight==>", goRight);
 
   const toggleZoomOut = () => {
     setIsZoomed(true);
@@ -59,7 +46,7 @@ const CustomModal = ({
   };
 
   useEffect(() => {
-    if (activeIndex) {
+    if (activeIndex !== null && activeIndex !== undefined) {
       toggleDownload(activeIndex);
     } else {
       console.log("error getting in progress of useEffect");
@@ -77,9 +64,9 @@ const CustomModal = ({
             // Create object URL
             const objectUrl = URL.createObjectURL(blob);
             setDownloadUrl(objectUrl);
-            console.log("Download URL set:", objectUrl);
+            // console.log("Download URL set:", objectUrl);
           })
-          .catch((error) => console.error("Error fetching image:", error));
+          .catch((error) => console.error(error));
       }
     } catch (error) {
       console.error("Error in toggleDownload:", error);
@@ -130,8 +117,8 @@ const CustomModal = ({
     }
   }, [activeIndex, isPlay]);
 
-  console.log("activeIndex==>", activeIndex);
-  console.log("prevIndex==>", prevIndex);
+  // console.log("activeIndex==>Modal", activeIndex);
+  // console.log("prevIndex==>", prevIndex);
 
   return (
     <>
@@ -187,7 +174,7 @@ const CustomModal = ({
           </span>
         </aside>
 
-        {/*------------------------------------------------- image-div--------------------------------------- */}
+        {/*-------------------------------------------------Big image-div--------------------------------------- */}
         <aside className="absolute top-1/4 md:top-[30%] lg:top-[5%] left-1/2 -translate-x-1/2 w-full grid place-items-center">
           <img
             src={galleryArr[activeIndex].image}

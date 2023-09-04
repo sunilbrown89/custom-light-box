@@ -27,34 +27,26 @@ const galleryArr = [
     _id: "4",
     image:
       "https://thumb.tildacdn.com/tild3764-6431-4238-b233-316264383136/-/cover/520x300/center/center/-/format/webp/1.png",
-    text: "Description of image 5",
+    text: "Description of image 4",
     placing: "md:col-span-2 md:row-span-1",
   },
   {
     _id: "5",
     image:
       "https://thumb.tildacdn.com/tild6463-6263-4132-a536-613437313266/-/cover/520x300/center/center/-/format/webp/FGuPZCcXMAMUuEd.jpeg",
-    text: "Description of image 6",
+    text: "Description of image 5",
     placing: "md:col-span-1 md:row-span-1",
   },
   {
     _id: "6",
     image:
       "https://thumb.tildacdn.com/tild3530-3566-4835-b165-386563663765/-/cover/520x300/center/center/-/format/webp/foto1.jpg",
-    text: "Description of image 7",
+    text: "Description of image 6",
     placing: "md:col-span-1 md:row-span-1",
   },
 ];
 
 const Gallery = () => {
-  const [clickedImg, setClickedImg] = useState<any>();
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handleClick = (item: IGallery, index: number) => {
-    setCurrentIndex(index);
-    setClickedImg(item?.image);
-  };
-
   return (
     <section className="lg:main-container px-1">
       <aside className="flex flex-col items-center gap-4  text-center pt-5">
@@ -83,6 +75,7 @@ export default Gallery;
 const GalleryCard = ({ item, index }: { item: IGallery; index: number }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [open, setOpen] = useState(false);
+
   return (
     <>
       <article
