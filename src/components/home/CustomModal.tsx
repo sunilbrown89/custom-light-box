@@ -47,6 +47,7 @@ const CustomModal = ({
 
   useEffect(() => {
     if (activeIndex !== null && activeIndex !== undefined) {
+      //activeIndex !== null && activeIndex !== undefined--> here if activeIndex is 0 then it converted to true condition.
       toggleDownload(activeIndex);
     } else {
       console.log("error getting in progress of useEffect");
@@ -76,6 +77,7 @@ const CustomModal = ({
   const handleNavigation = (type: string) => {
     if (type === "next") {
       const handleNext = () => {
+        setPrevIndex(activeIndex);
         setIsAnimation((prev) => !prev);
         if (activeIndex === galleryArr.length - 1) {
           setActiveIndex(0);
@@ -87,6 +89,7 @@ const CustomModal = ({
       return handleNext();
     } else {
       const handlePrev = () => {
+        setPrevIndex(activeIndex);
         setIsAnimation((prev) => !prev);
         if (activeIndex === 0) {
           setActiveIndex(galleryArr.length - 1);
@@ -177,12 +180,12 @@ const CustomModal = ({
         {/*-------------------------------------------------Big image-div--------------------------------------- */}
         <aside className="absolute top-1/4 md:top-[30%] lg:top-[5%] left-1/2 -translate-x-1/2 w-full grid place-items-center">
           <img
-            key={galleryArr[activeIndex]._id}
             src={galleryArr[activeIndex].image}
             alt="photo"
-            className={` w-11/12 md:w-10/12 lg:w-3/5 h-[40vh] md:h-[35vh] lg:h-full rounded-md transition-all duration-200 ease-in-out ${
+            className={` w-11/12 md:w-10/12 lg:w-3/5 h-[40vh] md:h-[35vh] lg:h-full object-fill rounded-md transition-all duration-200 ease-in-out ${
               isZoomed ? ` scale-110` : ""
-            } ${
+            } 
+            ${
               goLeft
                 ? isAnimation
                   ? "slider-animation-x-reverse"
@@ -190,7 +193,8 @@ const CustomModal = ({
                 : isAnimation
                 ? "slider-animation-x"
                 : "slider-animation-x-2"
-            } `}
+            } 
+            `}
           />
           <span className="absolute left-4 top-4 font-bold text-3xl text-white">
             {`${activeIndex}`}

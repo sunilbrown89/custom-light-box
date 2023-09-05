@@ -134,6 +134,9 @@ a {
   100% {
     transform: translateX(0);
   }
+  200% {
+    transform: translateX(-400%);
+  }
 }
 .slider-animation-x-2{
   animation: slider-x-2 0.5s ease-in-out;
@@ -144,6 +147,9 @@ a {
   }
   100% {
     transform: translateX(0);
+  }
+  200% {
+    transform: translateX(-400%);
   }
 }
 .slider-animation-x-reverse{
@@ -166,6 +172,28 @@ a {
   }
   100% {
     transform: translateX(0);
+  }
+}
+.go-left-slider{
+  animation: go-left-slider 0.5s ease-in-out;
+}
+@keyframes go-left-slider {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-400%);
+  }
+}
+.go-left-slider-2{
+  animation: go-left-slider-2 0.5s ease-in-out;
+}
+@keyframes go-left-slider-2 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-400%);
   }
 }
 
