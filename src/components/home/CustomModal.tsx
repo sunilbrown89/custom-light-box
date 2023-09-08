@@ -198,7 +198,7 @@ const CustomModal = ({
             src={galleryArr[activeIndex].image}
             alt="photo"
             className={` w-11/12 md:w-10/12 lg:w-3/5 h-[40vh] lg:h-[70vh] object-fill rounded-md transition-all duration-200 ease-in-out  ${
-              isZoomed ? ` scale-110` : ""
+              isZoomed ? ` scale-125` : ""
             } 
 
             ${

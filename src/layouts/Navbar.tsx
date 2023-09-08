@@ -48,7 +48,7 @@ const Navbar = () => {
       </nav>
       {/* ------------------drop down menu----------------------- */}
       <div
-        className={`h-[90vh] top-0 w-3/5 bg-white shadow-xl absolute transition-all ease-in-out duration-300 p-6 ${
+        className={`h-[105vh] md:h-[100vh] top-0 w-4/5 md:w-3/5 bg-white shadow-xl absolute transition-all ease-in-out duration-300 p-6 ${
           !isMenu ? `translate-x-[-100%]` : `translate-x-[0%]`
         }`}
       >
@@ -64,8 +64,8 @@ const Navbar = () => {
             ))}
           </ul>
           <div className="font-medium text-sm ">
-            <p>yet-another-react-lightbox.com</p>
-            <p>yet-another-react-lightbox.com</p>
+            <p>lightbox.com</p>
+            <p>lightbox.com</p>
           </div>
         </div>
       </div>
