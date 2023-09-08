@@ -18,6 +18,19 @@ const CustomModal = ({
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isAnimation, setIsAnimation] = useState(true);
   const [prevIndex, setPrevIndex] = useState(activeIndex);
+  // const [goLeft, setGoLeft] = useState(false);
+  // const [goRight, setGoRight] = useState(false);
+
+  // const fromLeftToRight = () => {
+  //   if (activeIndex < prevIndex) {
+  //     setGoRight(true);
+  //   }
+  // };
+  // const fromRightToLeft = () => {
+  //   if (activeIndex > prevIndex) {
+  //     setGoRight(true);
+  //   }
+  // };
 
   const goLeft = activeIndex < prevIndex;
   const goRight = activeIndex > prevIndex;
@@ -122,6 +135,8 @@ const CustomModal = ({
 
   // console.log("activeIndex==>Modal", activeIndex);
   // console.log("prevIndex==>", prevIndex);
+  // console.log("goLeft-->", goLeft);
+  // console.log("goRight-->", goRight);
 
   return (
     <>
@@ -182,9 +197,10 @@ const CustomModal = ({
           <img
             src={galleryArr[activeIndex].image}
             alt="photo"
-            className={` w-11/12 md:w-10/12 lg:w-3/5 h-[40vh] md:h-[35vh] lg:h-full object-fill rounded-md transition-all duration-200 ease-in-out ${
+            className={` w-11/12 md:w-10/12 lg:w-3/5 h-[40vh] lg:h-[70vh] object-fill rounded-md transition-all duration-200 ease-in-out  ${
               isZoomed ? ` scale-110` : ""
             } 
+
             ${
               goLeft
                 ? isAnimation
@@ -219,9 +235,9 @@ const CustomModal = ({
             <img
               src={item?.image}
               alt={item?.text}
-              className={`w-20 h-full border-2 cursor-pointer ${
+              className={`w-10 h-10 md:w-20 md:h-full border cursor-pointer transition-all duration-500 ease-in-out ${
                 activeIndex === index
-                  ? "border-yellow-500 rounded-xl"
+                  ? "rounded-xl scale-110"
                   : "border-transparent"
               }`}
               onClick={() => {
