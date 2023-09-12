@@ -1,5 +1,4 @@
-import { GoToTop, Gallery, Sunil } from "components/home";
-import Practice from "components/home/Practice";
+import { GoToTop, Gallery } from "components/home";
 
 import { PublicLayout } from "layouts";
 import type { NextPage } from "next";
@@ -9,8 +8,6 @@ const Home: NextPage = () => {
     <PublicLayout>
       <>
         <Gallery />
-        {/* <Sunil /> */}
-        {/* <Practice /> */}
         <GoToTop />
       </>
     </PublicLayout>

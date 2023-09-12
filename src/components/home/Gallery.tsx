@@ -38,6 +38,43 @@ const galleryArr = [
     text: "Description of image 6",
     placing: "md:col-span-1 md:row-span-1",
   },
+  {
+    _id: "7",
+    image: "/image7.jpg",
+    text: "Description of image 7",
+    placing: "md:col-span-1 md:row-span-1",
+  },
+  {
+    _id: "8",
+    image: "/image8.avif",
+    text: "Description of image 8",
+    placing: "md:col-span-1 md:row-span-1",
+  },
+  {
+    _id: "9",
+    image: "image9.jpg",
+    text: "Description of image 9",
+    placing: "md:col-span-1 md:row-span-1",
+  },
+
+  {
+    _id: "10",
+    image: "image10.jpg",
+    text: "Description of image 10",
+    placing: "md:col-span-1 md:row-span-1",
+  },
+  {
+    _id: "11",
+    image: "image11.jpg",
+    text: "Description of image 11",
+    placing: "md:col-span-1 md:row-span-1",
+  },
+  {
+    _id: "12",
+    image: "image12.jpg",
+    text: "Description of image 12",
+    placing: "md:col-span-1 md:row-span-1",
+  },
 ];
 
 const Gallery = () => {

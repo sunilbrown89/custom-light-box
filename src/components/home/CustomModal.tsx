@@ -1,5 +1,6 @@
 import ICONS from "assets/icons";
 import React, { useEffect, useState } from "react";
+import { useRef } from "react";
 type props = {
   galleryArr: IGallery[];
   activeIndex: number;
@@ -18,21 +19,15 @@ const CustomModal = ({
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isAnimation, setIsAnimation] = useState(true);
   const [prevIndex, setPrevIndex] = useState(activeIndex);
-  // const [goLeft, setGoLeft] = useState(false);
-  // const [goRight, setGoRight] = useState(false);
+  const miniImagePreview = useRef<HTMLImageElement>(null);
+  const mainMiniSlider = useRef<HTMLDivElement>(null);
 
-  // const fromLeftToRight = () => {
-  //   if (activeIndex < prevIndex) {
-  //     setGoRight(true);
-  //   }
-  // };
-  // const fromRightToLeft = () => {
-  //   if (activeIndex > prevIndex) {
-  //     setGoRight(true);
-  //   }
-  // };
-
-  const goLeft = activeIndex < prevIndex;
+  const goLeft =
+    prevIndex === galleryArr?.length - 1 && activeIndex === 0
+      ? activeIndex > prevIndex
+      : prevIndex === 0 && activeIndex === galleryArr?.length - 1
+      ? true
+      : activeIndex < prevIndex;
   const goRight = activeIndex > prevIndex;
 
   // console.log("goLeft==>", goLeft);
@@ -40,12 +35,10 @@ const CustomModal = ({
 
   const toggleZoomOut = () => {
     setIsZoomed(true);
-    // console.log("ZoomOut");
   };
 
   const toggleZoomIn = () => {
     setIsZoomed(false);
-    // console.log("zoomIn");
   };
 
   const toggleFullScreen = () => {
@@ -62,10 +55,38 @@ const CustomModal = ({
     if (activeIndex !== null && activeIndex !== undefined) {
       //activeIndex !== null && activeIndex !== undefined--> here if activeIndex is 0 then it converted to true condition.
       toggleDownload(activeIndex);
+
+      if (activeIndex >= 3 && activeIndex <= galleryArr?.length - 3) {
+        handleMiniSlideLTR();
+      }
+      if (prevIndex === 0 && activeIndex === galleryArr?.length - 1) {
+        mainMiniSlider.current?.scrollTo({
+          left:
+            Number(miniImagePreview?.current?.clientWidth || 0) * activeIndex,
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      if (activeIndex === prevIndex) {
+        mainMiniSlider.current?.scrollTo({
+          left:
+            Number(miniImagePreview?.current?.clientWidth || 0) * activeIndex,
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      if (activeIndex === 0) {
+        handleMiniSlideRTL();
+      }
     } else {
       console.log("error getting in progress of useEffect");
     }
   }, [activeIndex]);
+
+  console.log({ activeIndex });
+  console.log({ prevIndex });
 
   const toggleDownload = async (activeIndex: number) => {
     try {
@@ -119,7 +140,8 @@ const CustomModal = ({
     if (isPlay) {
       const time = setInterval(() => {
         setIsAnimation((prev) => !prev);
-        if (galleryArr.length - 1 === activeIndex) {
+        setPrevIndex(activeIndex);
+        if (galleryArr?.length - 1 === activeIndex) {
           setActiveIndex(0);
         } else {
           setActiveIndex(activeIndex + 1);
@@ -133,14 +155,29 @@ const CustomModal = ({
     }
   }, [activeIndex, isPlay]);
 
-  // console.log("activeIndex==>Modal", activeIndex);
-  // console.log("prevIndex==>", prevIndex);
-  // console.log("goLeft-->", goLeft);
-  // console.log("goRight-->", goRight);
+  const handleMiniSlideLTR = () => {
+    mainMiniSlider.current?.scrollBy({
+      left: goLeft
+        ? -(miniImagePreview?.current?.clientWidth || 0)
+        : miniImagePreview?.current?.clientWidth || 0,
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  const handleMiniSlideRTL = () => {
+    mainMiniSlider.current?.scrollTo({
+      left: 0,
+      top: 0,
+      behavior: "instant",
+    });
+  };
 
   return (
     <>
-      <div id="fs" className=" fixed z-[9999] inset-0 w-full h-full bg-black">
+      <div
+        id="fs"
+        className=" fixed z-[9999] inset-0 w-full h-full bg-black select-none "
+      >
         <aside className=" absolute top-4 right-3 w-fit h-fit flex items-center gap-4 text-white z-[9999]">
           {isFullScreen ? (
             <span className="cursor-pointer" onClick={toggleFullScreen}>
@@ -154,7 +191,7 @@ const CustomModal = ({
 
           <span
             id="zoomOut"
-            className={`cursor-pointer  ${isZoomed ? "text-gray-500" : ""}`}
+            className={`  ${isZoomed ? "text-gray-500 " : "cursor-pointer"}`}
             onClick={toggleZoomOut}
           >
             <ICONS.ZoomImageOut />
@@ -193,7 +230,7 @@ const CustomModal = ({
         </aside>
 
         {/*-------------------------------------------------Big image-div--------------------------------------- */}
-        <aside className="absolute top-1/4 md:top-[30%] lg:top-[5%] left-1/2 -translate-x-1/2 w-full grid place-items-center">
+        <aside className="absolute top-1/4 md:top-[30%] lg:top-[5%] left-1/2 -translate-x-1/2 w-full grid place-items-center overflow-hidden">
           <img
             src={galleryArr[activeIndex].image}
             alt="photo"
@@ -230,14 +267,18 @@ const CustomModal = ({
         </aside>
 
         {/* ------------------------------------small-image-div ------------------------------------------*/}
-        <aside className="absolute bottom-10  lg:bottom-5 w-full h-20 flex items-center justify-center gap-4">
-          {galleryArr.map((item, index) => (
+        <aside
+          ref={mainMiniSlider}
+          className="absolute scroll-smooth hidden-scrollbar z-[9999] bottom-10  lg:bottom-5  w-[19rem] md:w-[30rem] p-4 overflow-hidden overflow-x-auto  mx-auto left-1/2 -translate-x-1/2 h-24 snap-mandatory snap-x flex gap-2 md:gap-4"
+        >
+          {galleryArr?.map((item, index) => (
             <img
+              ref={activeIndex === index ? miniImagePreview : null}
               src={item?.image}
               alt={item?.text}
-              className={`w-10 h-10 md:w-20 md:h-full border cursor-pointer transition-all duration-500 ease-in-out ${
+              className={`w-10 scale-100 rounded h-10 md:w-20 md:h-full snap-center border cursor-pointer transition-all duration-500 ease-in-out ${
                 activeIndex === index
-                  ? "rounded-xl scale-110"
+                  ? "rounded-lg scale-[1.15]"
                   : "border-transparent"
               }`}
               onClick={() => {
